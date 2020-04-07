@@ -2,6 +2,8 @@ create table app_TASKS (
 	task_id INT AUTO_INCREMENT,
 	task_content VARCHAR(256),
 	task_answer VARCHAR(256),
+	user_id VARCHAR(256),
+	task_keyword(256),
 	PRIMARY KEY(task_id)
 )
 
