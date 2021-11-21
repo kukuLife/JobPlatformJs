@@ -1,28 +1,39 @@
 <template>
-    <div>
-        <div class="userId">
-            <label class="userIdSpan">userId</label>
-            <input type="text" class="userIdInput" v-model.trim=userId>
-        </div>
+    <div class="background">
+        <div class="registe-wrapper m-auto d-flex m-top f-wrap">
+            <div class="registe-elem m-auto w-full ">
+                <div class="registe-box d-flex m-auto">
+                    <label>User Id</label>
+                    <div w-full>
+                        <input type="text" v-model.trim=userId>
+                    </div>
+                </div>
+            </div>
+            <div class="registe-elem m-auto w-full">
+                <div class="registe-box d-flex m-auto">
+                    <label>Pass Word</label>
+                    <div w-full>
+                        <input type="text" v-model.trim="passWord">
+                    </div>
+                </div>
+            </div>
 
-        <div class="passWord">
-            <label class="passWordSpan">passWord</label>
-            <input type="text" class="passWordInput" v-model.trim="passWord">
-        </div>
-
-        <div class="mailAddress">
-            <label class="mailAddressSpan">mailAddress</label>
-            <input type="text" class="mailAddressInput" v-model.trim="mailAddress">
-        </div>
-        <div class="register-btn">
-            <button @click="register()">Registe</button>
+            <div class="registe-elem m-auto w-full">
+                <div class="registe-box d-flex m-auto">
+                    <label>User Key Word</label>
+                    <div w-full>
+                        <input type="text" v-model.trim="userKeyWord">
+                    </div>
+                </div>
+            </div>
+            <button class="registe-btn m-auto" @click="login()">Login</button>
         </div>
     </div>
-
 </template>
 
 <script>
 import router from '../router';
+import "@/assets/css/common-pc.css"
 import axios from 'axios';
 import qs from 'qs'
 axios.defaults.withCredentials = true;
@@ -30,17 +41,17 @@ axios.defaults.withCredentials = true;
 export default {
     data() {
         return {
-            userId : 'test',
-            passWord : 'test',
-            mailAddress : 'test',
+            userId : '',
+            passWord : '',
+            userKeyWord : '',
         };
     },
     methods : {
         register: function() {
-
             const paramsBeforeFormat = {
                 'userId' : this.userId,
-                'passWord' : this.passWord
+                'passWord' : this.passWord,
+                'userKeyWord' : this.userKeyWord
             }
 
             const config = {
@@ -68,32 +79,26 @@ export default {
 };
 </script>
 
-<style>
-    .userId {
-        margin-top: 20px;
+<style scoped>
+    .registe-wrapper {
+        min-width: 400px;
+        flex: 0 0 50%;
+        max-width : 50%;
+        background-color: #fff;
     }
 
-    label{
-        margin-left: 40%;
-        width:100px;
-        display:inline-block;
-        color: yellow;
+    .registe-elem input{
+        height: 30px;
+        min-width: 300px;
     }
 
-    .passWord {
-        margin-top: 20px;
+    .registe-btn {
+        margin-top: 10px;
     }
 
-    .mailAddress {
-        margin-top: 20px;
+    .registe-box {
+        flex-direction: column;
+        max-width: 300px;
     }
 
-    .register-btn {
-         margin-top: 20px;
-         margin-left: 45%;
-    }
-
-    body {
-        background: url('~@/assets/registBack.jpeg')
-    }
 </style>

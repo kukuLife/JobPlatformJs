@@ -8,12 +8,12 @@ var connection = mysql.createConnection({
     user:'root',
     password:'12345',
     port:'3306',
-    database:'job_platform'
+    database:'GOOD_JOB'
 });
 
 exports.getUserList = function(req, res) {
     var httpResult = new HttpResult();
-	connection.query('select * from app_UserInfo', function(error, result, field) {
+	connection.query('select * from USER', function(error, result, field) {
 		if(error) throw error;
         httpResult.data = result;  
         res.send(httpResult.data);      
@@ -23,7 +23,7 @@ exports.getUserList = function(req, res) {
 
 exports.doRegister = function(req,res){
     var httpResult = new HttpResult1();
-    connection.query("insert into app_UserInfo values (" + "'" + req.body.params.userId + "'" + ", " + "'" + req.body.params.passWord + "'" + ", " + "now()" + ")", function(error, result, field) {
+    connection.query("insert into USER values (" + "'" + req.body.params.userId + "'" + ", " + "'" + req.body.params.passWord + "'" + ", " + "'" + req.body.params.userKeyWord + "'" + ", " + "now()" + ")", function(error, result, field) {
 		if(error) throw error;
         httpResult.data = result;  
         res.send(httpResult.data);      
@@ -34,7 +34,7 @@ exports.doRegister = function(req,res){
 exports.getUserInfo = function(req,res){
     var httpResult=new HttpResult();
     
-    connection.query("select * from app_UserInfo where UI_ID = " + req.body.id, function(error, result, field) {
+    connection.query("select * from USER where USER_ID = " + req.body.userId, function(error, result, field) {
 		if(error) throw error;
         httpResult.data = result;  
         res.send(httpResult.data);      
@@ -43,11 +43,11 @@ exports.getUserInfo = function(req,res){
 
 exports.doLogin = function(req, res) {
     var httpResult = new HttpResult();
-    connection.query("select * from app_UserInfo where UI_ID =" + req.body.params.userId , function(error, result, field) {
+    connection.query("select * from USER where USER_ID =" + req.body.params.userId , function(error, result, field) {
     if(error) throw error;
     if(result && result != undefined && result.length > 0) {
         httpResult.data = result;
-        httpResult.data = {userId : result[0].UI_ID, userName : result[0].UI_PWD, ifSucess : true};
+        httpResult.data = {userId : result[0].USER_ID, userName : result[0].USER_PASSWORD, ifSucess : true};
         req.session.userId = req.body.params.userId;
         
         res.send(httpResult);
@@ -60,7 +60,7 @@ exports.doLogin = function(req, res) {
 
 exports.getProjectInfoList = function(req,res){
     var httpResult=new HttpResult();
-    connection.query("select * from app_Project_info where TARGET_USER = " + "'" + req.body.params.userId + "'", function(error, result, field) {
+    connection.query("select * from JOB where JOB_KEY_WORD = " + "'" + req.body.params.userKeyWord + "'", function(error, result, field) {
 		if(error) {
             console.log(error)
             throw error
@@ -77,7 +77,7 @@ exports.getProjectInfoList = function(req,res){
 
 exports.getTaskInfoList = function(req, res) {
     var httpResult = new HttpResult();
-    connection.query("select * from app_TASKS where user_id = " + "'" + req.body.params.userId + "'", function(error, result) {
+    connection.query("select * from TASK where TASK_KEY_WORD = " + "'" + req.body.params.userKeyWord + "'", function(error, result) {
 		if(error) {
             console.log(error)
             throw error
@@ -95,7 +95,7 @@ exports.getTaskInfoDetail = function(req, res) {
     var httpResult = new HttpResult();
     console.log(req.body.params.taskId)
     console.log(req.body.params.userId)
-    connection.query("select * from app_TASKS where user_id = " + "'" + req.body.params.userId + "' and task_id = '" + req.body.params.taskId + "'", function(error, result) {
+    connection.query("select * from TASK where TASK_KEY_WORD = " + "'" + req.body.params.userKeyWord + "' and TASK_ID = '" + req.body.params.taskId + "'", function(error, result) {
 		if(error) {
             console.log(error)
             throw error
@@ -114,7 +114,7 @@ exports.updateTaskAnswer = function(req, res) {
     var httpResult = new HttpResult()
     const path = require('path');
     const directoryPath = path.join(__dirname, '')
-    connection.query("update app_TASKS set task_answer = " + "'" + req.body.params.taskInfoDetail.task_answer + "' " +  "where task_id = " + "'" + req.body.params.taskInfoDetail.task_id + "'", function(error, result) {
+    connection.query("update TASK set TASK_ANSWER = " + "'" + req.body.params.taskInfoDetail.task_answer + "' " +  "where TASK_ID = " + "'" + req.body.params.taskInfoDetail.task_id + "'", function(error, result) {
         if(error) {
             console.log(error)
             throw error

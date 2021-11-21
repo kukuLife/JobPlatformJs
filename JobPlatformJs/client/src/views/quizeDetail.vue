@@ -3,9 +3,9 @@
         <div class="task_info">
             taskinfo
             <div class="taskInfo">
-                <p>{{ taskInfo.task_answer }}</p>
-                <p>{{ taskInfo.task_content }}</p>
-                <textarea cols="30" rows="10" v-model="taskInfo.task_answer"></textarea>
+                <p>{{ taskInfo.taskAnswer }}</p>
+                <p>{{ taskInfo.taskContent }}</p>
+                <textarea cols="30" rows="10" v-model="taskInfo.taskAnswer"></textarea>
             </div>
         </div>
         <div class="task_response">
@@ -33,12 +33,9 @@ export default {
 
     methods: {
          updateAnswer() {
-
-            console.log(this.taskInfo)
-
             const paramsBeforeFormat = {
-                'taskId' : this.taskInfo.task_id,
-                'taskAnswer' : this.taskInfo.task_answer
+                'taskId' : this.taskInfo.taskId,
+                'taskAnswer' : this.taskInfo.taskAnswer
             }
 
             const config = {

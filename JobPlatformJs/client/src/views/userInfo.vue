@@ -1,21 +1,14 @@
 <template>
-    <div class="all_info">
-        <div>Hello UserInfo</div> <!-- banner -->
-        <div class="user_info">
-            <span class="userId">userId : {{userId}}</span>
-            <span class="userName">userName : {{userName}}</span>
-            <div class="taskInfo">
-                <router-link :to="{path : '/taskInfo/', query:{ 'userId' : userId }}">taskInfo</router-link>
+    <div class="all_info d-flex">
+        <siteHeader />
+        <sideBar />
+        <div class="d-flex m-auto m-top user-info">
+            <div>
+                <quizs />
             </div>
-        </div>
-        <div class="project_info">
-            recommended projects
-            <div class="projectList">
-                <ul>
-                    <li v-for="project in projectList"  v-bind:key="project.PJ_ID">
-                        <router-link :to="{path : '/projectInfoDetail/', query:{ 'projectName' : project.PJ_NAME, 'projectContent' : project.PJ_INFO}}">{{ project.PJ_NAME }}</router-link>
-                    </li>
-                </ul>
+            <div class="d-flex course-job">
+                <courses />
+                <jobs />
             </div>
         </div>
      <router-view></router-view>
@@ -23,17 +16,24 @@
 </template>
 
 <script>
+import router from '../router'
+import axios from 'axios';
+import qs from 'qs'
+import sideBar from '@/components/sideBar'
+import siteHeader from '@/components/siteHeader'
+import courses from '@/components/courses'
+import quizs from '@/components/quizs'
+import jobs from '@/components/jobs'
+import "@/assets/css/common-pc.css"
 
-    import axios from 'axios';
     axios.defaults.withCredentials = true;
-
     export default {
         data() {
             return {
                 userId : this.$route.query.userId,
                 userName : this.$route.query.userName,
-                passWord : '',
-                projectList : []
+                userKeyWord : this.$route.query.userKeyWord,
+                jobList : []
             };
         },
         async mounted() {
@@ -45,15 +45,15 @@
                 },
                 params : {
                     'userId' : this.userId,
-                    'projectKeyWord' : ''
+                    'userKeyWord' : this.userKeyWord
                 }
             };
 
-            axios.get('http://localhost:8080/projectInfo/getProject', config).then((res) => {
+            axios.get('http://localhost:8080/jobInfo/getJobList', config).then((res) => {
                 if (res) {
-                    this.projectList = [];
+                    this.jobList = [];
                     res.data.forEach(element => {
-                        this.projectList.push(element);
+                        this.jobList.push(element);
                     }); 
                 }
             }).catch((res) => {
@@ -65,19 +65,51 @@
             getUserInfo() {
                alert('getUserInfo');
             },
+            logout() {
+                const paramsBeforeFormat = {
+                    'userId' : this.userId
+                }
+                const config = {
+                    header : {
+                        'X-Requested-With' : 'XMLHttpRequest',
+                        'Content-Type' : 'application/x-www-form-urlencoded',
+                        'withCredentials' : true,
+                        'Access-Control-Allow-Origin' : true
+                    },
+                    url : 'http://localhost:8080/logout',
+                    method : 'post',
+                    data : qs.stringify(paramsBeforeFormat)
+                };
+                
+               
+                axios(config).then((res) => {
+                    if (res.data) {
+                        router.push({ name: 'login'});
+                    }
+
+                }).catch((res) => {
+                    app.result = res.data;
+                    alert(res);
+                });
+
+            },
         },
+        components: {
+            siteHeader,
+            sideBar,
+            courses,
+            quizs,
+            jobs
+        }
     };
 </Script>
 
 <style scoped>
 
-.all_info {
-    width: 600px;
-    margin-left: 40%
-}
-
-.user_info {
-    margin-left: 20px;
+.user-info {
+    flex-direction: column;
+    width: 80%;
+    margin-left: 200px;
 }
 
 .userName{
@@ -88,20 +120,24 @@
     margin-top: 10px;
 }
 
-.project_info {
+.jobInfo {
     margin-top: 50px;
 }
 
-.projectList {
+.jobList {
     margin-left: 20px;
 }
 
-.projectList ul {
+.jobList ul {
     padding-left: 0px;
 }
 
-.projectList li {
+.jobList li {
     list-style: none;  
     margin-top: 10px;
+}
+
+.course-job {
+    flex:1 1 0%;
 }
 </style>

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import registe from './views/register.vue';
-import login from './views/Login.vue';
+import login from './views/login.vue';
 
 Vue.use(Router);
 
@@ -21,30 +21,25 @@ export default new Router({
       component: login,
     },
     {
-      path: '/home',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "about" */ './views/home.vue'),
-    },
-    {
       path: '/userInfo',
       name: 'userInfo',
       component: () => import(/* webpackChunkName: "about" */ './views/userInfo.vue'),
     },
     {
-      path: '/taskInfo',
-      name: 'taskInfo',
-      component: () => import(/* webpackChunkName: "about" */ './views/taskInfo.vue'),
+      path: '/quizs',
+      name: 'quizs',
+      component: () => import(/* webpackChunkName: "about" */ './views/quizs.vue'),
     },
     {
-      path: '/projectInfoDetail',
-      name: 'projectInfoDetail',
-      component: () => import(/* webpackChunkName: "about" */ './views/ProjectInfoDetail.vue'),
+      path: '/jobInfoDetail',
+      name: 'jobInfoDetail',
+      component: () => import(/* webpackChunkName: "about" */ './views/jobInfoDetail.vue'),
     },
     {
-      path: '/taskInfoDetail',
-      name: 'taskInfoDetail',
-      component: () => import(/* webpackChunkName: "about" */ './views/taskInfoDetail.vue'),
-    },
+      path: '/quizeDetail',
+      name: 'quizeDetail',
+      component: () => import(/* webpackChunkName: "about" */ './views/quizeDetail.vue'),
+    }
   ],
 });
 
