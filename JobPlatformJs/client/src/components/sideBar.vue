@@ -1,21 +1,22 @@
 <template>
     <div class="side-bar-all">
-        <div>
-            <div class="side-bar-header">user Info</div>
+        <div class="d-flex">
+            <div class="side-bar-header"><router-link to="/userInfo">user Info</router-link></div>
             <div>
                 <ul class="side-bar-item">
-                    <li>quizs</li>
-                    <li>jobs</li>
-                    <li>course</li>
+                    <li><router-link to="/quizs">quizs</router-link></li>
+                    <li><router-link to="/jobs">jobs</router-link></li>
+                    <li><router-link to="/courses">course</router-link></li>
                 </ul>
             </div>
         </div>
-        <div>
+        <div class="d-flex">
             <div class="side-bar-header">User Account</div>
             <div>
                 <ul class="side-bar-item">
-                    <li>user account</li>
-                    <li>messages</li>
+                    <li><router-link to="/mypage">user account</router-link></li>
+                    <li><router-link to="/myprofile">user profile</router-link></li>
+                    <li><router-link to="/notifications">notifications</router-link></li>
                 </ul>
             </div>
         </div>
@@ -39,14 +40,28 @@
      background-color: #39444d;
  }
  
- .side-bar-header {
+ .side-bar-header a {
      padding-left: 20px;
-     color : #dfe2e6
+     color: #8a9299;
+     text-decoration:none;
+ }
+
+ .side-bar-header {
+     color: #8a9299;
  }
 
  .side-bar-item {
      padding-left: 35px;
      color: hsla(0,0%,100%,.54);
+ }
+
+ ul li a{
+     color: #8a9299;
+     text-decoration:none;
+ }
+
+ .side-bar-all div {
+     flex-direction: column;
  }
 
 </style>

@@ -26,19 +26,49 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/userInfo.vue'),
     },
     {
+      path: '/courses',
+      name: 'courses',
+      component: () => import(/* webpackChunkName: "about" */ './views/courses.vue'),
+    },
+    {
       path: '/quizs',
       name: 'quizs',
       component: () => import(/* webpackChunkName: "about" */ './views/quizs.vue'),
     },
     {
-      path: '/jobInfoDetail',
-      name: 'jobInfoDetail',
-      component: () => import(/* webpackChunkName: "about" */ './views/jobInfoDetail.vue'),
+      path: '/jobs',
+      name: 'jobs',
+      component: () => import(/* webpackChunkName: "about" */ './views/jobs.vue'),
     },
     {
       path: '/quizeDetail',
       name: 'quizeDetail',
       component: () => import(/* webpackChunkName: "about" */ './views/quizeDetail.vue'),
+    },
+    {
+      path: '/courseDetail',
+      name: 'courseDetail',
+      component: () => import(/* webpackChunkName: "about" */ './views/courseDetail.vue'),
+    },
+    {
+      path: '/jobDetail',
+      name: 'jobDetail',
+      component: () => import(/* webpackChunkName: "about" */ './views/jobDetail.vue'),
+    },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: () => import(/* webpackChunkName: "about" */ './views/mypage.vue'),
+    },
+    {
+      path: '/myprofile',
+      name: 'myprofile',
+      component: () => import(/* webpackChunkName: "about" */ './views/myprofile.vue'),
+    },
+    {
+      path: '/notifications',
+      name: 'notifications',
+      component: () => import(/* webpackChunkName: "about" */ './views/notification.vue'),
     }
   ],
 });

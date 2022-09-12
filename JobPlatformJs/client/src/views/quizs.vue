@@ -1,104 +1,95 @@
 <template>
-    <div class="content-center quizes">
-        <div class="d-flex content-center">
-            <h2>quizes</h2>
-        </div>
-        <div class="d-flex content-center">
-            <div class="d-flex filter content-center">
-                <a>
-                    <i class="material-icons mr-sm-2">tune</i>
-                    <span>Filters</span>
-                </a>
-                <div class="filter-box">
-                    <div class="d-flex">
-                        <div>
-                            <label>label1</label>
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>                                
-                            </select>
-                        </div>
-                        <div>
-                            <label>label2</label>
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>                                 
-                            </select>
-                        </div>
-                        <div><a>link a</a></div>
+    <div class="content-center">
+        <siteHeader />
+        <sideBar />
+        <div class="main-frame">
+            <div class="d-flex content-center">
+                <h2>quizs</h2>
+            </div>
+            <div 
+            @mouseover="hover = true"
+            @mouseleave="hover = false"
+            class="quiz-filter">
+                <a href="#"><i class="material-icons">tune</i></a>
+                <div class="filter-dropdown" v-if="hover">
+                    <div class="dropdown-item">
+                        <form action="#">
+                            <div class="form-group mb-0">
+                                <label class="form-label" for="custom-select">Category</label><br>
+                                <select id="custom-select" class="form-control custom-select" style="width: 100px;">
+                                    <option selected="">All categories</option>
+                                    <option value="1">Vue.js</option>
+                                    <option value="2">Node.js</option>
+                                    <option value="3">GitHub</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="d-flex search-course">
-                <div class="d-flex">
-                    <form class="d-flex">
-                        <div class="d-flex">
-                            <input class="d-flex" type="text" placeholder="search courses"/>
-                            <button>
-                                <i class="material-icons">search</i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex content-center lable">
-            <h1>cool courses</h1>
-        </div>
-        <div class="d-flex content-center part">
-            <div class="d-flex child-part">
-                <div class="d-flex little-part">
-                    <div class="l1-part">
+            <div class="d-flex content-center quizs">
+                <div class="d-flex quiz">
+                    <div class="d-flex quiz-img">
                         <a href="/test">
                             <img src="@/assets/images/vuejs.png"/>
                         </a>
-                        <div class="l2-part">
-                            <h4>
-                                <a href="/test">Learn vue js</a>
-                            </h4>
-                        </div>
+                    </div>
+                    <div class="d-flex quiz-wording">
+                        <h4>
+                            <a href="/test">quiz vue js</a>
+                        </h4>
                     </div>
                 </div>
-                <div class="d-flex little-part">
-                    <div class="l1-part">
+                <div class="d-flex quiz">
+                    <div class="d-flex quiz-img">
                         <a href="/test">
                             <img src="@/assets/images/nodejs.png"/>
                         </a>
-                        <div class="l2-part">
-                            <h4>
-                                <a href="/test">Learn node</a>
-                            </h4>  
-                        </div>
+                    </div>
+                    <div class="d-flex quiz-wording">
+                        <h4>
+                            <a href="/test">quiz nodes</a>
+                        </h4>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex child-part">
-                <div class="d-flex little-part">
-                    <div class="l1-part">
+                <div class="d-flex quiz">
+                    <div class="d-flex quiz-img">
                         <a href="/test">
                             <img src="@/assets/images/github.png"/>
                         </a>
-                        <div class="l2-part">
-                            <h4>
-                                <a href="/test">Learn github</a>
-                            </h4>
-                        </div>
+                    </div>
+                    <div class="d-flex quiz-wording">
+                        <h4>
+                            <a href="/test">quiz github </a>
+                        </h4>
                     </div>
                 </div>
-                <div class="d-flex little-part">
-                    <div class="l1-part">
-                        <a href="/test">
-                            <img src="@/assets/images/gulp.png"/>
+            </div>
+            <div class="d-flex pager">
+                <ul class="pager d-flex">
+                    <li>
+                        <a>
+                            <span class="material-icons">chevron_left</span>
+                            <span>PRIEVE</span>
                         </a>
-                        <div class="l2-part">
-                            <h4>
-                                <a href="/test">Learn gulp</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
+                    </li>
+                    <li>
+                        <a>
+                            1
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            2
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <span>NEXT</span>
+                            <span class="material-icons">chevron_right</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -106,14 +97,25 @@
 
 <script>
   import "@/assets/css/common-pc.css"
+  import sideBar from '@/components/sideBar'
+  import siteHeader from '@/components/siteHeader'
+  import dashBoard from '@/components/dashBoard.vue'
   export default {
+    data() {
+        return {
+            hover:false
+        };
+    },
+  components: { 
+      dashBoard,
+      siteHeader,
+      sideBar
+    },
     head : {
         title: {
-    inner: 'タイトル',
-    // innerに入力したものがタイトルになりますが、separatorとcomplementを使用すると「タイトル | 捕捉」のようになります。
-    // トップページ以外でよく見ますね。不要な場合は省略可能です。
+    inner: 'title',
     separator: '|',
-    complement: '捕捉'
+    complement: 'quizs'
   },
         link: [
             { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
@@ -185,4 +187,57 @@
     .filter-box div {
         flex-direction: column;
     }
+
+    div.pager {
+        justify-content: center;
+    }
+
+    div.quiz-img a img {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .quiz-img {
+         justify-content: center;
+    }
+
+    div.quiz {
+        background-color:#fff;
+        flex-basis: 48%;
+        margin-top: 20px;
+        margin-left: 10px; 
+        flex-direction: column;
+    }
+
+    div.quizs {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .quiz-wording {
+        flex-direction: column-reverse;
+    }
+
+    .quiz-filter {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 50px;
+        margin: auto;
+    }
+
+    .filter-dropdown {
+        max-width: 100px;
+        min-width: 100px;
+        display: flex;
+        margin: auto;
+        justify-content: center;
+        background: white;
+    }
+
+    .main-frame {
+        margin-left: 100px;
+        margin-top: 50px;
+    }
+
 </style>
