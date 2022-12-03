@@ -49,10 +49,10 @@ import "@/assets/css/common-pc.css"
                 }
             };
 
-            axios.get('http://localhost:8080/jobInfo/getJobList', config).then((res) => {
+            axios.get('http://localhost:8080/#/jobs', config).then((res) => {
                 if (res) {
-                    this.jobList = [];
-                    res.data.forEach(element => {
+                    this.jobList = [{'jobName':'job1'}, {'jobName':'job2'}, {'jobName':'job3'}, {'jobName':'job4'}, {'jobName':'job5'}];
+                    this.jobList.forEach(element => {
                         this.jobList.push(element);
                     }); 
                 }

@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import Router, { RouterOptions } from 'vue-router';
 import registe from './views/register.vue';
 import login from './views/Login.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router =new Router({
   routes: [
     {
       path: '/registe',
@@ -71,6 +71,8 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/notification.vue'),
     }
   ],
-});
+} as RouterOptions);
+
+export default router
 
 
