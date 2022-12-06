@@ -10,7 +10,7 @@
   "dependencies": {
     "apexcharts": "^3.27.3",
     "axios": "^0.21.2",
-    "qs": "^6.9.2",
+    "qs": "^6.9.7",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.6.2",
     "vue-head": "^2.2.0",
