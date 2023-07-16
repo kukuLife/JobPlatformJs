@@ -9,7 +9,6 @@
             <div class="d-flex profile-box">
                 <div class="d-flex">
                     <div class="d-flex"><label>your photo</label></div>
-                    <div class="d-flex">photo</div>
                     <div class="d-flex">your avatar photo</div>
                 </div>
                 <div class="d-flex">

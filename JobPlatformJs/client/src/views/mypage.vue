@@ -6,16 +6,20 @@
             <div class="d-flex info-part">
                 <h4>Basic Information</h4>
                 <div class="d-flex">
-                    <label>FIRST NAME</label>
+                    <label>NAME</label>
                     <div class="d-flex"><input type="text" placeholder="your first name" value="fusang"/></div>
-                </div>
-                <div class="d-flex">
-                    <label>LAST NAME</label>
-                    <div class="d-flex"><input type="text" placeholder="your last name" value="wan"/></div>
                 </div>
                  <div class="d-flex">
                     <label>Email Address</label>
                     <div class="d-flex"><input type="text" placeholder="your email address" value="fusang.wan@rakuten.com"/></div>
+                </div>
+                <div class="d-flex">
+                    <label>Tel</label>
+                    <div class="d-flex"><input type="text" placeholder="your tel" value="08076984539"/></div>
+                </div>
+                <div class="d-flex">
+                    <label>keyword</label>
+                    <div class="d-flex"><input type="text" placeholder="your keyword" value="key word"/></div>
                 </div>
             </div>
             <div class="d-flex info-part">

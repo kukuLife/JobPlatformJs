@@ -26,6 +26,18 @@
                     </div>
                 </div>
                 <div class="d-flex">
+                    <label>TEL:</label>
+                    <div class="input-group input-group-merge">
+                        <span class="material-icons md-light">phone</span><input id="telephone" type="telephone" required="" class="form-control form-control-prepended" placeholder="Your email address">
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <label>ADDRESS:</label>
+                    <div class="input-group input-group-merge">
+                        <span class="material-icons md-light">mail</span><input id="address" type="address" required="" class="form-control form-control-prepended" placeholder="Your address">
+                    </div>
+                </div>
+                <div class="d-flex">
                     <label>PASSWORD:</label>
                     <div class="input-group input-group-merge">
                         <span class="material-icons md-light">password</span><input id="password" type="password" required="" class="form-control form-control-prepended" placeholder="Choose a password">
