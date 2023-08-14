@@ -4,13 +4,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-import router from './router';
-
-export default {
+export default defineComponent({
+  name: 'App',
   mounted() {
-    //this.$router.push({ name: 'login'});
+
   }
-}
+});
 </script>

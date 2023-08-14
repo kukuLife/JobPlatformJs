@@ -1,12 +1,10 @@
-import Vue from 'vue';
-import Router, { RouterOptions } from 'vue-router';
 import registe from './views/register.vue';
 import login from './views/Login.vue';
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.use(Router);
 
-const router =new Router({
-  routes: [
+
+const routes = [
     {
       path: '/registe',
       name: 'registe',
@@ -19,6 +17,11 @@ const router =new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: login,
+    },
+    {
+      path: '/registerComplete',
+      name: 'registerComplete',
+      component: () => import(/* webpackChunkName: "about" */ './views/registerComplete.vue'),
     },
     {
       path: '/userInfo',
@@ -70,9 +73,15 @@ const router =new Router({
       name: 'notifications',
       component: () => import(/* webpackChunkName: "about" */ './views/notification.vue'),
     }
-  ],
-} as RouterOptions);
+  ];
 
-export default router
+  const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
+export default router;
+
+
 
 

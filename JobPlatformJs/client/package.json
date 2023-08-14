@@ -11,20 +11,19 @@
     "apexcharts": "^3.27.3",
     "axios": "^0.21.2",
     "qs": "^6.9.2",
-    "vue": "^2.6.10",
+    "vue": "^3.3.4",
     "vue-apexcharts": "^1.6.2",
     "vue-head": "^2.2.0",
-    "vue-router": "^3.6.5",
-    "vue-select": "^3.12.2",
-    "vuex": "^3.0.1"
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-typescript": "^3.8.0",
-    "@vue/cli-service": "^3.8.0",
+    "@vue/cli-plugin-typescript": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "@vue/compiler-sfc": "^3.3.4",
     "flatpickr": "^4.6.9",
     "moment": "^2.29.1",
-    "typescript": "^3.4.3",
     "vue-flatpickr-component": "^9.0.5",
-    "vue-template-compiler": "^2.6.10"
+    "vue-router": "^4.2.4",
+    "vue-select": "^4.0.0-beta.6"
   }
 }

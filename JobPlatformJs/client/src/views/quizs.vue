@@ -99,7 +99,6 @@
   import "@/assets/css/common-pc.css"
   import sideBar from '@/components/sideBar'
   import siteHeader from '@/components/siteHeader'
-  import dashBoard from '@/components/dashBoard.vue'
   export default {
     data() {
         return {
@@ -107,7 +106,6 @@
         };
     },
   components: { 
-      dashBoard,
       siteHeader,
       sideBar
     },
