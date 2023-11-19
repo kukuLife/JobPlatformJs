@@ -51,6 +51,7 @@ label {
 
 ul {
     list-style: none;
+    flex-direction: column;
 }
 
 h2 {

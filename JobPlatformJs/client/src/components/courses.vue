@@ -2,7 +2,7 @@
     <div class="d-flex courses">
         <div class="d-flex course-header">
             <div>
-                <h4>Courses</h4>
+                <h4><a href="/courses">Courses</a></h4>
             </div>
             <div>
                 <span>all courses</span>
@@ -12,19 +12,19 @@
             <table>
                 <thead>
                     <tr>
-                        <th><a @click="sortBy('courseName')" class="sort" href="javascript:void(0)">courseName</a></th>
-                        <th><a @click="sortBy('courseCategory')" class="sort" href="javascript:void(0)">courseCategory</a></th>
-                        <th><a @click="sortBy('date')" class="sort" href="javascript:void(0)">Date</a></th>
-                        <th><a @click="sortBy('Popularity')" class="sort" href="javascript:void(0)">Popularity</a></th>
+                        <th><a @click="sortBy('courseTitle')" class="sort" href="javascript:void(0)">courseTitle</a></th>
+                        <th><a @click="sortBy('courseDetail')" class="sort" href="javascript:void(0)">courseDetail</a></th>
+                        <th><a @click="sortBy('courseKeyword')" class="sort" href="javascript:void(0)">courseKeyword</a></th>
+                        <th><a @click="sortBy('createDatetime')" class="sort" href="javascript:void(0)">createDatetime</a></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr :key="tr.index" v-for="tr in sort_courses">
-                        <td><a href="javascript:void(0)">{{ tr.courseName }}</a></td>
-                        <td><a href="javascript:void(0)">{{ tr.courseCategory }}</a></td>
-                        <td><a href="javascript:void(0)">{{ tr.dateTime }}</a></td>
-                        <td><a href="javascript:void(0)">{{ tr.Popularity }}</a></td>
-                    </tr>
+                        <tr :key="tr" v-for="tr in courseList">
+                            <td><a href="javascript:void(0)">{{ tr.fields.course_title}}</a></td>
+                            <td><a href="javascript:void(0)">{{ tr.fields.course_detail }}</a></td>
+                            <td><a href="javascript:void(0)">{{ tr.fields.course_keyword }}</a></td>
+                            <td><a href="javascript:void(0)">{{ tr.fields.create_date_time }}</a></td>
+                        </tr>
                 </tbody>
             </table>
         </div>
@@ -53,17 +53,25 @@ span {
 import "@/assets/css/common-pc.css"
 export default {
     name: 'courses',
+    props: {
+        courseList: {
+            type: Array,
+            default: []
+        }
+    },
+    mounted() {
+        
+    },
     data: function() {
         return {
-            courseList : [{courseName: 'course1', courseCategory:"category1", Popularity: 1, dateTime:'19900890', imageUrl:""}, {courseName: 'course2', courseCategory:"category2", Popularity: 2, dateTime:'19900890', imageUrl:""}, {courseName: 'course3', courseCategory:"category3", Popularity: 3, dateTime:'19900890', imageUrl:""}],
             sort_key: "",
             sort_asc: true,
         }
     },
     computed: {
-        sort_courses() {
-            console.log("sort be triggered")
-            if (this.sort_key != "") {
+        sort_courses: function() {
+            if (this.courseList && this.courseList[0] && this.courseList[0].fields) {
+                if (this.sort_key != "") {
             let set = 1;
             this.sort_asc ? (set = 1) : (set = -1);
             this.courseList.sort((a, b) => {
@@ -74,7 +82,9 @@ export default {
             return this.courseList;
             } else {
             return this.courseList;
-            }   
+            }
+            }
+              
         }
     },
     methods: {
@@ -88,3 +98,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+table th {
+    width: 30px !important;
+}
+</style>

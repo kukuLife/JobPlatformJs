@@ -25,16 +25,6 @@
     import "@/assets/css/common-pc.css"
 
     export default {
-        head : {
-            title: {
-                inner: 'タイトル',
-                separator: '|',
-                complement: '通知'
-            },
-            link: [
-                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-            ],
-        },
         name: 'notification',
         components: {
             siteHeader,

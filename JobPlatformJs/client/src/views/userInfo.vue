@@ -3,12 +3,25 @@
         <siteHeader />
         <sideBar />
         <div class="d-flex m-auto m-top user-info">
-            <div>
-                <quizs />
+            <div v-if="this.puzzleList && this.puzzleList.length > 0">
+                <quizs :puzzleList="this.puzzleList"/>
+            </div>
+            <div v-else>
+                loading......
             </div>
             <div class="d-flex course-job">
-                <courses />
-                <jobs />
+                <div v-if=courseList>
+                    <courses :courseList="this.courseList" />
+                </div>
+                <div v-else>
+                    loading......
+                </div>   
+                <div v-if=jobList>
+                 <jobs :jobList="this.jobList"/>
+                </div>
+                <div v-else>
+                    loading......
+                </div>
             </div>
         </div>
      <router-view></router-view>
@@ -17,7 +30,6 @@
 
 <script>
 import router from '../router'
-import axios from 'axios';
 import qs from 'qs'
 import sideBar from '@/components/sideBar'
 import siteHeader from '@/components/siteHeader'
@@ -25,41 +37,63 @@ import courses from '@/components/courses'
 import quizs from '@/components/quizs'
 import jobs from '@/components/jobs'
 import "@/assets/css/common-pc.css"
+import axiosHttp from "@/http/headerHandler.js"
 
-    axios.defaults.withCredentials = true;
+  
     export default {
         data() {
             return {
                 userId : this.$route.query.userId,
                 userName : this.$route.query.userName,
                 userKeyWord : this.$route.query.userKeyWord,
-                jobList : []
+                jobList : [],
+                courseList : [],
+                puzzleList : []
             };
         },
-        async mounted() {
+        beforeMount() {
             const config = {
-                headers : {
-                    'X-Requested-With' : 'XMLHttpRequest',
-                    'Content-Type' : 'application / x-www-form-urlencoded',
-                    'withCredentials' : true,
-                },
-                params : {
-                    'userId' : this.userId,
-                    'userKeyWord' : this.userKeyWord
-                }
-            };
+                    header : {
+                        'X-Requested-With' : 'XMLHttpRequest',
+                        'Content-Type' : 'application/json',
+                        'Access-Control-Allow-Origin' : true
+                    },
+                    url : 'http://192.168.2.110:8000/mainBack/jobs/?userId=1',
+                    method : 'get',
 
-            axios.get('http://localhost:8080/#/jobs', config).then((res) => {
+                };
+
+            axiosHttp(config).then((res) => {
                 if (res) {
-                    this.jobList = [{'jobName':'job1'}, {'jobName':'job2'}, {'jobName':'job3'}, {'jobName':'job4'}, {'jobName':'job5'}];
-                    this.jobList.forEach(element => {
-                        this.jobList.push(element);
-                    }); 
+                    this.jobList = JSON.parse(res.data);
                 }
             }).catch((res) => {
                 app.result = res.data;
                 alert(res);
             });
+
+            config.url = 'http://192.168.2.110:8000/mainBack/courses/?userId=1';
+
+            axiosHttp(config).then((res) => {
+                if (res) {
+                    this.courseList = JSON.parse(res.data);
+                    console.log("courseList===" + this.courseList)
+                }
+            }).catch((res) => {
+                app.result = res.data;
+                alert(res);
+            });
+            config.url = 'http://192.168.2.110:8000/mainBack/puzzles/?userId=2';
+                axiosHttp(config).then((res) => {
+                    if (res) {
+                        this.puzzleList = JSON.parse(res.data);
+                        
+                        console.log("puzzleList===" + this.puzzleList)
+                    }
+                }).catch((res) => {
+                    app.result = res.data;
+                    alert(res);
+                });
         },
         methods: {
             getUserInfo() {
@@ -82,7 +116,7 @@ import "@/assets/css/common-pc.css"
                 };
                 
                
-                axios(config).then((res) => {
+                axiosHttp(config).then((res) => {
                     if (res.data) {
                         router.push({ name: 'login'});
                     }

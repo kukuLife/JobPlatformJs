@@ -142,16 +142,6 @@
   import siteHeader from '@/components/siteHeader'
 
   export default {
-    head : {
-        title: {
-            inner: 'タイトル',
-            separator: '|',
-            complement: '捕捉'
-        },
-        link: [
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-        ],
-    },
     name: 'quizs',
     components: {
         siteHeader,

@@ -46,16 +46,6 @@
     import "@/assets/css/common-pc.css"
 
     export default {
-        head : {
-            title: {
-                inner: 'タイトル',
-                separator: '|',
-                complement: 'マイページ'
-            },
-            link: [
-                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-            ],
-        },
         name: 'mypage',
         components: {
             siteHeader,

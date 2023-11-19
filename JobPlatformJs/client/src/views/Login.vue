@@ -1,4 +1,5 @@
 <template>
+    <meta data-vue-meta="custom" charset="utf-8">
     <div class="background">
         <siteHeader />
         <sideBar />
@@ -17,7 +18,7 @@
             </div>
             <div class="d-flex">
                 <div>
-                    <label for="email">Your email address:</label>
+                    <label from="email">Your email address:</label>
                 </div>
                 <div class="d-flex">
                     <div>
@@ -54,18 +55,12 @@
     import axios from 'axios';
     import sideBar from '@/components/sideBar'
     import siteHeader from '@/components/siteHeader'
+    import { useMeta } from 'vue-meta'
+    import axiosHttp from "@/http/headerHandler.js"
     //axios.defaults.withCredentials = true;
     var qs = require('qs');
 
     export default {
-        
-
-        head : {
-            link: [
-                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-            ],
-            title : 'login'
-        },
         name : 'login',
         data() {
             return {
@@ -85,7 +80,6 @@
                     header : {
                         'X-Requested-With' : 'XMLHttpRequest',
                         'Content-Type' : 'application/json',
-                        //'withCredentials' : true,
                         'Access-Control-Allow-Origin' : true
                     },
                     url : 'http://192.168.2.110:8000/mainBack/auth/',
@@ -93,14 +87,14 @@
                     data : paramsBeforeFormat
                 };
                 
-                axios(config).then((res) => {
+                axiosHttp(config).then((res) => {
                     if (res.data) {
                         console.log(res)
                         this.$router.push({ name: 'userInfo', query : {userId : this.userId, userName : this.userName, userKeyWord : res.data.userKeyWord}});
                     }
                 }).catch((res) => {
                     app.result = res.data;
-                    alert(res);
+                    alert("please try again, fail");
                 });
             },
         },

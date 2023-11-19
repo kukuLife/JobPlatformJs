@@ -2,32 +2,17 @@
     <div class="d-flex jobs">
         <div class="d-flex">
             <div class="d-flex title">
-                <h4>jobs</h4>
+                <h4><a href="/jobs">jobs</a></h4>
                 <p>by categories</p>
             </div>
-            <div><a href="xxx">more</a></div>
         </div>
-        <div class="d-flex">
-            <ul>
+        <div class="d-flex jobList">
+            <ul v-for="job in jobList">
                 <li>
                     <div class="d-flex">
                         <a><img src="@/assets/images/gulp.png" height="50" width="50"/></a>
-                        <div class="job-name">FrontEnd</div>
-                        <div class="job-amount">10</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="d-flex">
-                        <a><img src="@/assets/images/github.png" height="50" width="50"/></a>
-                        <div class="job-name">BackEnd</div>
-                        <div class="job-amount">20</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="d-flex">
-                        <a><img src="@/assets/images/vuejs.png" height="50" width="50"/></a>
-                        <div class="job-name">Infra</div>
-                        <div class="job-amount">30</div>
+                        <div class="job-name">{{ job.fields.job_title }}</div>
+                        <div class="job-amount">{{ job.fields.job_detail }}</div>
                     </div>
                 </li>
             </ul>
@@ -37,7 +22,7 @@
 
 <style scoped>
 .jobs {
-    margin-left: 200px;
+    margin-left: 30px;
 }
 </style>
 
@@ -45,6 +30,11 @@
 import "@/assets/css/common-pc.css"
 export default {
     name: 'jobs',
+    props: {
+        jobList: {
+            type: Array
+        }
+    }
 }
 </script>
 
@@ -68,6 +58,10 @@ export default {
     padding-left: 10px;
 }
 
+.jobList {
+    flex-direction: column;
+}
+
 p {
     margin-top: 3px;
 }
@@ -75,6 +69,8 @@ p {
 ul {
     padding-left: 0;
     flex: 1;
+    flex-direction: column;
+    display: flex;
 }
 
 a {
@@ -94,5 +90,9 @@ p {
     text-transform: uppercase;
     font-size: .707rem;
     font-weight: 500;
+}
+
+div {
+    padding-left: 10px;
 }
 </style>

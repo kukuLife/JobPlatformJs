@@ -27,6 +27,47 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex" v-for="(item, index) in puzzleList" :key="index">
+                {{ item }}
+                <div class="d-flex quiz">
+                    <div class="d-flex quiz-img">
+                        <a href="/test">
+                            <img src="@/assets/images/vuejs.png"/>
+                        </a>
+                    </div>
+                    <div class="d-flex quiz-wording">
+                        <h4>
+                            {{ item.fields.puzzle_title }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="d-flex quiz">
+                    <div class="d-flex quiz-img">
+                        <a href="/test">
+                            <img src="@/assets/images/nodejs.png"/>
+                        </a>
+                    </div>
+                    <div class="d-flex quiz-wording">
+                        <h4>
+                            {{ item.fields.puzzle_title }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="d-flex quiz">
+                    <div class="d-flex quiz-img">
+                        <a href="/test">
+                            <img src="@/assets/images/github.png"/>
+                        </a>
+                    </div>
+                    <div class="d-flex quiz-wording">
+                        <h4>
+                            {{ item.fields.puzzle_title }}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="d-flex content-center quizs">
                 <div class="d-flex quiz">
                     <div class="d-flex quiz-img">
@@ -99,25 +140,39 @@
   import "@/assets/css/common-pc.css"
   import sideBar from '@/components/sideBar'
   import siteHeader from '@/components/siteHeader'
+  import axiosHttp from "@/http/headerHandler.js"
+
   export default {
     data() {
         return {
+            puzzleList:[],
             hover:false
         };
+    },
+    beforeMount() {
+        const config = {
+            header : {
+                'X-Requested-With' : 'XMLHttpRequest',
+                'Content-Type' : 'application/json',
+                'Access-Control-Allow-Origin' : true
+            },
+            url : 'http://192.168.2.110:8000/mainBack/puzzles/',
+            method : 'get',
+        };
+
+        axiosHttp(config).then((res) => {
+                if (res) {
+                    this.puzzleList = JSON.parse(res.data);
+                }
+            }).catch((res) => {
+                app.result = res.data;
+                console.log(res)
+            });
+        
     },
   components: { 
       siteHeader,
       sideBar
-    },
-    head : {
-        title: {
-    inner: 'title',
-    separator: '|',
-    complement: 'quizs'
-  },
-        link: [
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-        ],
     },
     name: 'quizs'
   }
@@ -126,6 +181,11 @@
 <style scoped>
     .quizes {
         flex-direction: column;
+    }
+
+    .quiz {
+        flex-direction: row;
+        flex: 50% 50%;
     }
 
     .search-course {
@@ -236,6 +296,15 @@
     .main-frame {
         margin-left: 100px;
         margin-top: 50px;
+    }
+
+    ul {
+        list-style-type: none;
+        flex-direction: row;
+    }
+
+    li {
+        padding-left: 30px;
     }
 
 </style>

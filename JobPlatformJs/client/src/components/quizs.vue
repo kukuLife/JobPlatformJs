@@ -1,24 +1,35 @@
 <template>
     <div>
-        <div class="quiz-header d-flex">
-            <div class="h2 quizCount">100</div>
-            <div class="languageWording">
-                <h3>Javascript</h3>
-                <p>quizCount</p>
-            </div>
-            <div class="languageSelector">
-                <vSelect :options="options">select</vSelect>
-            </div>
-        </div>
-       
+       <div>
+       </div>
         <div class="quiz-body d-flex">
-            <div id="chart" class="category-chart flex-full">
-                <div><h4>categoryGraph</h4></div>
-                <VueApexCharts type="donut" width="380" :options="chartOptionsCategory" :series="seriesCategory"></VueApexCharts>
+            <div id="chart" class="category-chart d-flex">
+                <div><h4>puzzleGraph</h4></div>
+                <VueApexCharts type="donut" width="380" ref="chart" :options="chartOptionsCategory" :series="seriesCategory"></VueApexCharts>
             </div>
-            <div class="line-chart flex-full">
-                <div><h4>lineGraph</h4></div>
-                <VueApexCharts type="bar" width="350" :options="chartOptionsTimeLine" :series="seriesTimeLine"></VueApexCharts>
+            <div class="d-flex">
+              <div>
+                <h4><a href="/quizs">puzzleList</a></h4>
+                <table>
+                <thead>
+                    <tr>
+                        <th>puzzleTitle</th>
+                        <th>puzzleDetail</th>
+                        <th>puzzleKeyword</th>
+                        <th>puzzleCreateTime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr :key="tr" v-for="tr in puzzleList">
+                  
+                            <td>{{ tr.fields.puzzle_title}}</td>
+                            <td>{{ tr.fields.puzzle_detail }}</td>
+                            <td>{{ tr.fields.puzzle_key_word }}</td>
+                            <td>{{ tr.fields.create_date_time }}</td>
+                        </tr>
+                </tbody>
+            </table>
+              </div>
             </div>
         </div>
     </div>
@@ -26,15 +37,25 @@
 
 <script>
 import "@/assets/css/common-pc.css"
+import { reactive, computed } from 'vue'
 import "vue-select/dist/vue-select.css";
+import { toRefs } from 'vue'
 import vSelect from "vue-select"
-import VueApexCharts from 'vue-apexcharts'
+import VueApexCharts from 'vue3-apexcharts'
+
+
+
 export default {
-    name: 'quizs',
+    name: 'puzzles',
+    props: {
+        puzzleList: {
+            type: Array,
+            default: [44, 55, 41, 17, 15]
+        }
+    },
     data: function() {
-        return { 
-            options : ["option1", "option2", "option3"],
-            seriesCategory: [44, 55, 41, 17, 15],
+        return {
+            seriesCategory: this.puzzleList.map(e => e.pk),
             chartOptionsCategory: {
                 chart: {
                 width: 380,
@@ -64,7 +85,7 @@ export default {
                     }
                 }
                 },
-                labels: ["Comedy", "Action", "SciFi", "Drama", "Horror"],
+                 labels: this.puzzleList.map(e => e.pk),
                 dataLabels: {
                 dropShadow: {
                     blur: 3,
@@ -131,63 +152,26 @@ export default {
               }
             },
             
-            xaxis: {
-              categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-              position: 'top',
-              axisBorder: {
-                show: false
-              },
-              axisTicks: {
-                show: false
-              },
-              crosshairs: {
-                fill: {
-                  type: 'gradient',
-                  gradient: {
-                    colorFrom: '#D8E3F0',
-                    colorTo: '#BED1E6',
-                    stops: [0, 100],
-                    opacityFrom: 0.4,
-                    opacityTo: 0.5,
-                  }
-                }
-              },
-              tooltip: {
-                enabled: true,
-              }
-            },
-            yaxis: {
-              axisBorder: {
-                show: false
-              },
-              axisTicks: {
-                show: false,
-              },
-              labels: {
-                show: false,
-                formatter: function (val) {
-                  return val + "%";
-                }
-              }
-            
-            },
-            title: {
-              text: 'Monthly Inflation in Argentina, 2002',
-              floating: true,
-              offsetY: 330,
-              align: 'center',
-              style: {
-                color: '#444'
-              }
-            }
+           
           },
         }
     },
+    mounted() {
+     
+    },
+    computed: {
+      puzzleKeyWords: function puzzleKeyWords() {
+        return this.puzzleList
+      }
+    },
+
     components : {
         vSelect,
         VueApexCharts
     } 
 }
+
+
 </script>
 
 <style scoped>

@@ -71,11 +71,6 @@ import qs from 'qs'
 axios.defaults.withCredentials = true;
 
 export default {
-    head: {
-        link: [
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-        ],
-    },
     data() {
         return {
             userId : '',

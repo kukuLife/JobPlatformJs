@@ -63,6 +63,7 @@ import siteHeader from '@/components/siteHeader'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import { Japanese } from 'flatpickr/dist/l10n/ja'
+import moment from 'moment';
 
 export default {
     data () {
